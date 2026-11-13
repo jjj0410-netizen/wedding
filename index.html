@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍길동 ♥ 김우주 결혼식에 초대합니다</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Gowun Batang (명조체 감성) & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS & JS (무료 오픈스트리트맵 기반 줌인/아웃 지도) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Gowun Batang"', 'serif'],
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                        eng: ['"Cormorant Garamond"', 'serif'],
+                    },
+                    colors: {
+                        ivory: '#FAF8F5',
+                        warmBeige: '#F2ECE4',
+                        champagne: '#D4B895',
+                        deepGold: '#B8966C',
+                        charcoal: '#2C2A29',
+                        mutedGray: '#7A7571',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#ECE8E1] text-charcoal font-sans antialiased selection:bg-champagne selection:text-white">
+
+    <!-- 모바일 청첩장 메인 컨테이너 (최대 너비 480px 중앙 정렬) -->
+    <main class="max-w-[480px] mx-auto bg-ivory min-h-screen shadow-2xl overflow-hidden relative pb-12">
+
+        <!-- 1. 메인 커버 섹션 (main.jpg 활용) -->
+        <section class="relative w-full">
+            <!-- 상단 영문 타이틀 -->
+            <div class="pt-10 pb-6 text-center px-4">
+                <p class="font-eng tracking-[0.25em] text-xs text-deepGold uppercase mb-2">Wedding Invitation</p>
+                <h1 class="font-serif text-2xl tracking-widest text-charcoal font-normal">
+                    홍길동 <span class="text-champagne mx-1.5 text-lg">♥</span> 김우주
+                </h1>
+                <p class="text-xs text-mutedGray mt-2 tracking-wider">2027. 10. 09. SAT PM 12:00</p>
+            </div>
+
+            <!-- 메인 웨딩 사진 -->
+            <div class="px-5">
+                <div class="relative rounded-t-full overflow-hidden shadow-lg aspect-[4/5] bg-warmBeige">
+                    <img 
+                        src="main.jpg" 
+                        alt="신랑 홍길동 신부 김우주 메인 웨딩 사진" 
+                        class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x750/F2ECE4/8C7A6B?text=main.jpg';"
+                    >
+                    <!-- 하단 은은한 그라데이션 오버레이 -->
+                    <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent flex items-end justify-center pb-4">
+                        <p class="font-eng italic text-white/90 text-sm tracking-widest">We are getting married</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 예식 일시 및 장소 요약 -->
+            <div class="text-center py-8 px-6">
+                <p class="font-serif text-base text-charcoal leading-relaxed">
+                    2027년 10월 9일 토요일 낮 12시<br>
+                    <span class="font-bold text-deepGold">서울신라호텔</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 구분선 장식 -->
+        <div class="flex items-center justify-center my-2">
+            <span class="w-12 h-[1px] bg-champagne/50"></span>
+            <span class="mx-3 text-champagne text-xs">✦</span>
+            <span class="w-12 h-[1px] bg-champagne/50"></span>
+        </div>
+
+        <!-- 2. 초대 문구 및 신랑·신부 연락처 섹션 -->
+        <section class="py-12 px-7 text-center">
+            <p class="font-eng text-xs tracking-[0.2em] text-deepGold uppercase mb-2">Invitation</p>
+            <h2 class="font-serif text-xl text-charcoal mb-8">소중한 분들을 초대합니다</h2>
+            
+            <div class="font-serif text-[15px] text-charcoal/90 leading-[2.1] space-y-5">
+                <p>
+                    서로 다른 두 사람이 만나<br>
+                    사랑이라는 이름으로 하나가 되려 합니다.
+                </p>
+                <p>
+                    깊어가는 가을의 문턱에서<br>
+                    평생을 함께할 약속을 나누는 자리에<br>
+                    귀한 걸음 하시어 축복해 주시면<br>
+                    더없는 기쁨으로 간직하겠습니다.
+                </p>
+            </div>
+
+            <!-- 신랑 / 신부 성함 표기 -->
+            <div class="mt-10 pt-8 border-t border-champagne/30 space-y-3 font-serif text-base">
+                <div class="flex items-center justify-center gap-2">
+                    <span class="text-mutedGray text-sm">신랑</span>
+                    <span class="font-bold text-lg tracking-wider text-charcoal">홍길동</span>
+                </div>
+                <div class="flex items-center justify-center gap-2">
+                    <span class="text-mutedGray text-sm">신부</span>
+                    <span class="font-bold text-lg tracking-wider text-charcoal">김우주</span>
+                </div>
+            </div>
+
+            <!-- 신랑 · 신부 연락하기 버튼 영역 -->
+            <div class="mt-8 grid grid-cols-2 gap-3">
+                <!-- 신랑 연락처 -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-warmBeige flex flex-col items-center">
+                    <span class="text-xs text-mutedGray mb-1">신랑에게 연락하기</span>
+                    <span class="font-serif font-bold text-base text-charcoal mb-3">홍길동</span>
+                    <div class="flex gap-3">
+                        <a href="tel:000-0000-0000" aria-label="신랑에게 전화하기" class="w-10 h-10 rounded-full bg-ivory hover:bg-champagne hover:text-white text-deepGold flex items-center justify-center transition-colors shadow-sm">
+                            <i class="fa-solid fa-phone text-sm"></i>
+                        </a>
+                        <a href="sms:000-0000-0000" aria-label="신랑에게 문자하기" class="w-10 h-10 rounded-full bg-ivory hover:bg-champagne hover:text-white text-deepGold flex items-center justify-center transition-colors shadow-sm">
+                            <i class="fa-solid fa-comment-dots text-sm"></i>
+                        </a>
+                    </div>
+                    <span class="text-[11px] text-mutedGray mt-2">000-0000-0000</span>
+                </div>
+
+                <!-- 신부 연락처 -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-warmBeige flex flex-col items-center">
+                    <span class="text-xs text-mutedGray mb-1">신부에게 연락하기</span>
+                    <span class="font-serif font-bold text-base text-charcoal mb-3">김우주</span>
+                    <div class="flex gap-3">
+                        <a href="tel:000-0000-0000" aria-label="신부에게 전화하기" class="w-10 h-10 rounded-full bg-ivory hover:bg-champagne hover:text-white text-deepGold flex items-center justify-center transition-colors shadow-sm">
+                            <i class="fa-solid fa-phone text-sm"></i>
+                        </a>
+                        <a href="sms:000-0000-0000" aria-label="신부에게 문자하기" class="w-10 h-10 rounded-full bg-ivory hover:bg-champagne hover:text-white text-deepGold flex items-center justify-center transition-colors shadow-sm">
+                            <i class="fa-solid fa-comment-dots text-sm"></i>
+                        </a>
+                    </div>
+                    <span class="text-[11px] text-mutedGray mt-2">000-0000-0000</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 예식 달력 및 실시간 D-Day 카운트다운 섹션 -->
+        <section class="py-12 px-6 bg-warmBeige/60">
+            <div class="text-center mb-6">
+                <p class="font-eng text-xs tracking-[0.2em] text-deepGold uppercase mb-1">Calendar</p>
+                <h2 class="font-serif text-xl text-charcoal">2027년 10월 9일</h2>
+                <p class="text-xs text-mutedGray mt-1">토요일 오후 12시 00분</p>
+            </div>
+
+            <!-- 2027년 10월 달력 카드 (2027년 10월 1일은 금요일, 9일은 토요일) -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-champagne/20">
+                <div class="grid grid-cols-7 text-center text-xs font-medium text-mutedGray pb-3 border-b border-ivory">
+                    <span class="text-rose-400">일</span>
+                    <span>월</span>
+                    <span>화</span>
+                    <span>수</span>
+                    <span>목</span>
+                    <span>금</span>
+                    <span class="text-blue-400">토</span>
+                </div>
+                <div class="grid grid-cols-7 text-center text-sm gap-y-2.5 pt-3 font-serif">
+                    <!-- 10월 1일(금) 시작 전 빈칸 5개 -->
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span>1</span>
+                    <span class="text-blue-500">2</span>
+                    
+                    <span class="text-rose-500">3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+                    <!-- 예식일 10월 9일 하이라이트 -->
+                    <span class="flex items-center justify-center">
+                        <span class="w-8 h-8 rounded-full bg-deepGold text-white font-bold flex items-center justify-center shadow-md">9</span>
+                    </span>
+                    
+                    <span class="text-rose-500">10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span class="text-blue-500">16</span>
+                    <span class="text-rose-500">17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span class="text-blue-500">23</span>
+                    <span class="text-rose-500">24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span class="text-blue-500">30</span>
+                    <span class="text-rose-500">31</span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <!-- 실시간 D-Day 카운트다운 -->
+            <div class="mt-6 bg-white rounded-2xl p-4 shadow-sm border border-champagne/20 text-center">
+                <div id="countdown-grid" class="grid grid-cols-4 gap-2 divide-x divide-ivory">
+                    <div>
+                        <span id="cd-days" class="block font-eng text-2xl font-semibold text-deepGold">000</span>
+                        <span class="text-[10px] text-mutedGray uppercase tracking-wider">Days</span>
+                    </div>
+                    <div>
+                        <span id="cd-hours" class="block font-eng text-2xl font-semibold text-charcoal">00</span>
+                        <span class="text-[10px] text-mutedGray uppercase tracking-wider">Hour</span>
+                    </div>
+                    <div>
+                        <span id="cd-mins" class="block font-eng text-2xl font-semibold text-charcoal">00</span>
+                        <span class="text-[10px] text-mutedGray uppercase tracking-wider">Min</span>
+                    </div>
+                    <div>
+                        <span id="cd-secs" class="block font-eng text-2xl font-semibold text-charcoal">00</span>
+                        <span class="text-[10px] text-mutedGray uppercase tracking-wider">Sec</span>
+                    </div>
+                </div>
+                <p id="dday-text" class="text-xs text-mutedGray mt-3 font-serif">
+                    홍길동 ♥ 김우주의 결혼식이 <span class="text-deepGold font-bold" id="dday-highlight">계산중...</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. 웨딩 갤러리 섹션 (첨부된 모든 이미지 파일 활용) -->
+        <section class="py-12 px-5">
+            <div class="text-center mb-8">
+                <p class="font-eng text-xs tracking-[0.2em] text-deepGold uppercase mb-1">Gallery</p>
+                <h2 class="font-serif text-xl text-charcoal">우리의 소중한 순간</h2>
+                <p class="text-xs text-mutedGray mt-1">사진을 터치하시면 크게 보실 수 있습니다</p>
+            </div>
+
+            <!-- 반응형 2열 갤러리 그리드 -->
+            <div class="grid grid-cols-2 gap-3" id="gallery-grid">
+                <!-- 1. main.jpg -->
+                <div class="gallery-item relative rounded-xl overflow-hidden shadow-sm aspect-[3/4] cursor-pointer group bg-warmBeige" onclick="openLightbox(0)">
+                    <img src="main.jpg" alt="웨딩 갤러리 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x533/F2ECE4/8C7A6B?text=main.jpg';">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+                </div>
+
+                <!-- 2. wddding5.jpg (첨부 파일명 그대로 사용) -->
+                <div class="gallery-item relative rounded-xl overflow-hidden shadow-sm aspect-[3/4] cursor-pointer group bg-warmBeige" onclick="openLightbox(1)">
+                    <img src="wddding5.jpg" alt="웨딩 갤러리 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x533/F2ECE4/8C7A6B?text=wddding5.jpg';">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+                </div>
+
+                <!-- 3. wedding1.jpg -->
+                <div class="gallery-item relative rounded-xl overflow-hidden shadow-sm aspect-[3/4] cursor-pointer group bg-warmBeige" onclick="openLightbox(2)">
+                    <img src="wedding1.jpg" alt="웨딩 갤러리 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x533/F2ECE4/8C7A6B?text=wedding1.jpg';">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+                </div>
+
+                <!-- 4. wedding2.jpg -->
+                <div class="gallery-item relative rounded-xl overflow-hidden shadow-sm aspect-[3/4] cursor-pointer group bg-warmBeige" onclick="openLightbox(3)">
+                    <img src="wedding2.jpg" alt="웨딩 갤러리 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x533/F2ECE4/8C7A6B?text=wedding2.jpg';">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+                </div>
+
+                <!-- 5. wedding3.jpg -->
+                <div class="gallery-item relative rounded-xl overflow-hidden shadow-sm aspect-[3/4] cursor-pointer group bg-warmBeige" onclick="openLightbox(4)">
+                    <img src="wedding3.jpg" alt="웨딩 갤러리 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x533/F2ECE4/8C7A6B?text=wedding3.jpg';">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+                </div>
+
+                <!-- 6. wedding4.jpg -->
+                <div class="gallery-item relative rounded-xl overflow-hidden shadow-sm aspect-[3/4] cursor-pointer group bg-warmBeige" onclick="openLightbox(5)">
+                    <img src="wedding4.jpg" alt="웨딩 갤러리 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x533/F2ECE4/8C7A6B?text=wedding4.jpg';">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 오시는 길 및 무료 지도(줌인/줌아웃 지원) 섹션 -->
+        <section class="py-12 px-5 bg-warmBeige/60">
+            <div class="text-center mb-6">
+                <p class="font-eng text-xs tracking-[0.2em] text-deepGold uppercase mb-1">Location</p>
+                <h2 class="font-serif text-xl text-charcoal">오시는 길</h2>
+                <p class="font-serif font-bold text-lg text-charcoal mt-3">서울신라호텔</p>
+                <p class="text-xs text-mutedGray mt-1">서울특별시 중구 동호로 249 (장충동2가)</p>
+            </div>
+
+            <!-- Leaflet 무료 지도 컨테이너 (줌인/줌아웃 및 드래그 이동 지원) -->
+            <div class="relative rounded-2xl overflow-hidden shadow-md border border-champagne/30 bg-white">
+                <div id="wedding-map" class="w-full h-[300px] z-10"></div>
+                
+                <!-- 지도 컨트롤 안내 및 내 위치로 초기화 버튼 -->
+                <div class="bg-white px-4 py-2.5 flex items-center justify-between text-xs border-t border-ivory">
+                    <span class="text-mutedGray"><i class="fa-solid fa-magnifying-glass-plus text-deepGold mr-1"></i> + / - 버튼 또는 손가락으로 확대/축소 가능</span>
+                    <button type="button" onclick="resetMapCenter()" class="px-2.5 py-1 rounded-lg bg-ivory hover:bg-champagne hover:text-white text-charcoal font-medium transition-colors">
+                        <i class="fa-solid fa-location-crosshairs mr-1"></i>식장 위치
+                    </button>
+                </div>
+            </div>
+
+            <!-- 외부 지도 앱 바로가기 버튼 -->
+            <div class="grid grid-cols-3 gap-2 mt-3">
+                <a href="https://map.naver.com/p/search/서울신라호텔" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-ivory py-2.5 px-2 rounded-xl text-center text-xs font-medium text-charcoal shadow-sm border border-champagne/20 flex items-center justify-center gap-1.5 transition-colors">
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span> 네이버지도
+                </a>
+                <a href="https://map.kakao.com/link/search/서울신라호텔" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-ivory py-2.5 px-2 rounded-xl text-center text-xs font-medium text-charcoal shadow-sm border border-champagne/20 flex items-center justify-center gap-1.5 transition-colors">
+                    <span class="w-2 h-2 rounded-full bg-yellow-400"></span> 카카오맵
+                </a>
+                <a href="https://www.openstreetmap.org/?mlat=37.5559&mlon=127.0052#map=17/37.5559/127.0052" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-ivory py-2.5 px-2 rounded-xl text-center text-xs font-medium text-charcoal shadow-sm border border-champagne/20 flex items-center justify-center gap-1.5 transition-colors">
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span> 큰지도보기
+                </a>
+            </div>
+
+            <!-- 교통편 안내 -->
+            <div class="mt-6 bg-white rounded-2xl p-5 shadow-sm border border-champagne/20 space-y-4 text-left text-xs leading-relaxed">
+                <div>
+                    <h3 class="font-bold text-charcoal text-sm mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-train-subway text-deepGold"></i> 지하철 이용 시
+                    </h3>
+                    <p class="text-mutedGray">3호선 동대입구역 5번 출구 도보 약 5분 거리 (장충단공원 방면 셔틀버스 운행)</p>
+                </div>
+                <div class="border-t border-ivory pt-3">
+                    <h3 class="font-bold text-charcoal text-sm mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-car text-deepGold"></i> 자가용 및 주차 안내
+                    </h3>
+                    <p class="text-mutedGray">내비게이션에 '서울신라호텔' 검색 / 호텔 내 전용 주차장 무료 주차 가능</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 마음 전하실 곳 (원클릭 계좌번호 복사 기능) -->
+        <section class="py-12 px-6 text-center">
+            <p class="font-eng text-xs tracking-[0.2em] text-deepGold uppercase mb-1">Account</p>
+            <h2 class="font-serif text-xl text-charcoal mb-3">마음 전하실 곳</h2>
+            <p class="text-xs text-mutedGray leading-relaxed mb-8">
+                참석이 어려우신 분들을 위해<br>
+                축하의 마음을 전하실 수 있는 계좌를 안내해 드립니다.
+            </p>
+
+            <!-- 계좌 정보 카드 -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-champagne/30 text-left">
+                <div class="flex items-center justify-between pb-3 border-b border-ivory">
+                    <span class="text-xs font-medium text-deepGold bg-ivory px-2.5 py-1 rounded-full">신랑 · 신부 측 계좌</span>
+                    <span class="text-xs text-mutedGray">예금주: 홍길동</span>
+                </div>
+                
+                <div class="pt-4 flex items-center justify-between gap-3">
+                    <div>
+                        <p class="text-xs text-mutedGray mb-0.5">농협은행</p>
+                        <p id="account-number-display" class="font-sans font-semibold text-base tracking-wide text-charcoal select-all">
+                            123456-78910
+                        </p>
+                    </div>
+                    
+                    <!-- 계좌번호 복사 버튼 -->
+                    <button 
+                        type="button" 
+                        onclick="copyAccountNumber('123456-78910')"
+                        class="px-4 py-2.5 rounded-xl bg-deepGold hover:bg-charcoal text-white text-xs font-medium shadow-sm transition-all active:scale-95 flex items-center gap-1.5 shrink-0 cursor-pointer"
+                    >
+                        <i class="fa-regular fa-copy"></i>
+                        <span>계좌복사</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 하단 푸터 및 청첩장 링크 공유 -->
+        <footer class="pt-6 pb-8 px-6 text-center border-t border-champagne/20">
+            <button 
+                type="button" 
+                onclick="copyPageLink()"
+                class="w-full py-3.5 rounded-xl bg-warmBeige hover:bg-champagne hover:text-white text-charcoal text-xs font-medium transition-colors flex items-center justify-center gap-2 mb-6 cursor-pointer"
+            >
+                <i class="fa-solid fa-share-nodes"></i>
+                <span>청첩장 주소 복사하기</span>
+            </button>
+            
+            <p class="font-eng italic text-sm text-deepGold">Thank you for celebrating with us</p>
+            <p class="text-[11px] text-mutedGray mt-1">홍길동 ♥ 김우주 드림</p>
+        </footer>
+
+    </main>
+
+    <!-- 토스트 메시지 알림 박스 (alert 대체용) -->
+    <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 translate-y-3">
+        <div class="bg-charcoal/95 text-white px-5 py-3 rounded-full shadow-xl text-xs font-medium flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-circle-check text-champagne"></i>
+            <span id="toast-message">복사되었습니다.</span>
+        </div>
+    </div>
+
+    <!-- 갤러리 전체화면 라이트박스 모달 -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/95 hidden flex-col items-center justify-center p-4">
+        <!-- 상단 닫기 및 카운터 -->
+        <div class="w-full max-w-[480px] flex items-center justify-between text-white py-3 px-2">
+            <span id="lightbox-counter" class="text-xs font-eng tracking-widest text-white/80">1 / 6</span>
+            <button type="button" onclick="closeLightbox()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- 이미지 뷰어 영역 -->
+        <div class="relative w-full max-w-[480px] flex-1 flex items-center justify-center overflow-hidden">
+            <button type="button" onclick="prevImage()" aria-label="이전 사진" class="absolute left-2 z-10 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/80">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            
+            <img id="lightbox-img" src="" alt="확대 웨딩 사진" class="max-h-[78vh] max-w-full object-contain rounded-lg shadow-2xl transition-opacity duration-200">
+            
+            <button type="button" onclick="nextImage()" aria-label="다음 사진" class="absolute right-2 z-10 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/80">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. 무료 지도(Leaflet + OpenStreetMap) 초기화
+        // ==========================================
+        let weddingMap;
+        const shillaCoords = [37.5559, 127.0052]; // 서울신라호텔 위도, 경도
+
+        function initMap() {
+            try {
+                // 줌 컨트롤(확대/축소 버튼) 및 마우스 휠/터치 핀치 줌 활성화
+                weddingMap = L.map('wedding-map', {
+                    center: shillaCoords,
+                    zoom: 16,
+                    zoomControl: true,
+                    scrollWheelZoom: true,
+                    touchZoom: true
+                });
+
+                // OpenStreetMap 무료 타일 레이어 추가
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; OpenStreetMap'
+                }).addTo(weddingMap);
+
+                // 커스텀 하트 마커 아이콘 생성
+                const customIcon = L.divIcon({
+                    className: 'custom-wedding-marker',
+                    html: `<div style="background-color:#B8966C; color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:3px solid white; box-shadow:0 4px 10px rgba(0,0,0,0.3); font-size:14px;">♥</div>`,
+                    iconSize: [36, 36],
+                    iconAnchor: [18, 18]
+                });
+
+                // 서울신라호텔 위치 마커 및 팝업 등록
+                const marker = L.marker(shillaCoords, { icon: customIcon }).addTo(weddingMap);
+                marker.bindPopup(`
+                    <div style="text-align:center; font-family:'Noto Sans KR', sans-serif; padding:2px;">
+                        <strong style="font-size:13px; color:#2C2A29;">서울신라호텔</strong><br>
+                        <span style="font-size:11px; color:#7A7571;">2027. 10. 09 (토) 낮 12시</span>
+                    </div>
+                `).openPopup();
+            } catch (error) {
+                console.error("지도 로딩 중 오류 발생:", error);
+            }
+        }
+
+        // 식장 기본 위치 및 줌 레벨로 복원
+        function resetMapCenter() {
+            if (weddingMap) {
+                weddingMap.setView(shillaCoords, 16, { animate: true });
+            }
+        }
+
+        // ==========================================
+        // 2. D-Day 실시간 카운트다운 (2027년 10월 9일 12:00)
+        // ==========================================
+        function updateCountdown() {
+            const targetDate = new Date('2027-10-09T12:00:00+09:00').getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            const daysEl = document.getElementById('cd-days');
+            const hoursEl = document.getElementById('cd-hours');
+            const minsEl = document.getElementById('cd-mins');
+            const secsEl = document.getElementById('cd-secs');
+            const highlightEl = document.getElementById('dday-highlight');
+
+            if (diff <= 0) {
+                daysEl.textContent = '00';
+                hoursEl.textContent = '00';
+                minsEl.textContent = '00';
+                secsEl.textContent = '00';
+                highlightEl.textContent = '오늘입니다! 진심으로 축하합니다 ♥';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            daysEl.textContent = String(days).padStart(2, '0');
+            hoursEl.textContent = String(hours).padStart(2, '0');
+            minsEl.textContent = String(minutes).padStart(2, '0');
+            secsEl.textContent = String(seconds).padStart(2, '0');
+            highlightEl.textContent = `${days}일 남았습니다.`;
+        }
+
+        // ==========================================
+        // 3. 계좌번호 및 링크 복사 기능 (document.execCommand 활용)
+        // ==========================================
+        let toastTimer;
+        function showToast(message) {
+            const toastBox = document.getElementById('toast-box');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+
+            toastBox.classList.remove('opacity-0', 'translate-y-3');
+            toastBox.classList.add('opacity-100', 'translate-y-0');
+
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toastBox.classList.remove('opacity-100', 'translate-y-0');
+                toastBox.classList.add('opacity-0', 'translate-y-3');
+            }, 2500);
+        }
+
+        function copyTextFallback(text, successMessage) {
+            try {
+                const tempInput = document.createElement('textarea');
+                tempInput.value = text;
+                tempInput.style.position = 'fixed';
+                tempInput.style.left = '-9999px';
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999);
+                const successful = document.execCommand('copy');
+                document.body.removeChild(tempInput);
+
+                if (successful) {
+                    showToast(successMessage);
+                } else {
+                    showToast('복사에 실패했습니다. 번호를 길게 눌러 복사해주세요.');
+                }
+            } catch (err) {
+                console.error('클립보드 복사 오류:', err);
+                showToast('복사 기능을 지원하지 않는 환경입니다.');
+            }
+        }
+
+        function copyAccountNumber(accountNum) {
+            copyTextFallback(`농협 ${accountNum}`, `계좌번호(농협 ${accountNum})가 복사되었습니다.`);
+        }
+
+        function copyPageLink() {
+            copyTextFallback(window.location.href, '청첩장 링크가 클립보드에 복사되었습니다.');
+        }
+
+        // ==========================================
+        // 4. 갤러리 라이트박스 모달 뷰어
+        // ==========================================
+        const galleryImages = [
+            'main.jpg',
+            'wddding5.jpg',
+            'wedding1.jpg',
+            'wedding2.jpg',
+            'wedding3.jpg',
+            'wedding4.jpg'
+        ];
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            updateLightboxContent();
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightboxContent() {
+            const imgEl = document.getElementById('lightbox-img');
+            const counterEl = document.getElementById('lightbox-counter');
+            const currentSrc = galleryImages[currentImageIndex];
+
+            imgEl.onerror = function() {
+                this.onerror = null;
+                this.src = `https://placehold.co/600x800/2C2A29/FAF8F5?text=${currentSrc}`;
+            };
+            imgEl.src = currentSrc;
+            counterEl.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightboxContent();
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateLightboxContent();
+        }
+
+        // 터치 스와이프로 라이트박스 사진 넘기기 지원
+        let touchStartX = 0;
+        const lightboxModal = document.getElementById('lightbox-modal');
+        lightboxModal.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lightboxModal.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) nextImage();
+            if (touchEndX - touchStartX > 50) prevImage();
+        }, { passive: true });
+
+        // 페이지 로드 시 초기화
+        window.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
